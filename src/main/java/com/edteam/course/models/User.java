@@ -11,6 +11,8 @@ public class User {
     private String phone;
     private Date birthDay;
 
+    public User(){ }
+
     public User(long id, String name, String lastName, String email, String phone, Date birthDay) {
         this.id = id;
         this.name = name;
