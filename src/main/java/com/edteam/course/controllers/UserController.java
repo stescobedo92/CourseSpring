@@ -1,6 +1,7 @@
 package com.edteam.course.controllers;
 
 import com.edteam.course.models.User;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,13 +19,25 @@ public class UserController {
         List<User> listUser = new ArrayList<>();
 
         User user = new User();
-        user.setName("Sergio");
-        user.setLastName("Triana Escobedo");
-        user.setEmail("stescobedo.31@gmail.com");
-        user.setPhone("+5352019764");
+        user.setName("Joe");
+        user.setLastName("Wick");
+        user.setEmail("anyemail@email.com");
+        user.setPhone("55555");
 
         listUser.add(user);
 
         return listUser;
+    }
+
+    //Get user by id
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    User getUserById(@PathVariable long id){
+        User user = new User();
+        user.setName("Joe");
+        user.setLastName("Wick");
+        user.setEmail("anyemail@email.com");
+        user.setPhone("55555");
+
+        return user;
     }
 }
