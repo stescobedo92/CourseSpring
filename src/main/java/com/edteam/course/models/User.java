@@ -1,10 +1,18 @@
 package com.edteam.course.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
+@Entity
 public class User {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
     private String name;
     private String lastName;
     private String email;
@@ -13,7 +21,7 @@ public class User {
 
     public User(){ }
 
-    public User(long id, String name, String lastName, String email, String phone, Date birthDay) {
+    public User(Integer id, String name, String lastName, String email, String phone, Date birthDay) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -22,11 +30,11 @@ public class User {
         this.birthDay = birthDay;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,10 +1,7 @@
 package com.edteam.course.controllers;
 
 import com.edteam.course.models.User;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +34,14 @@ public class UserController {
         user.setLastName("Wick");
         user.setEmail("anyemail@email.com");
         user.setPhone("55555");
+
+        return user;
+    }
+
+    //Get user by id
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    User insertUser(@RequestBody User user){
+        //Todo: register in the database
 
         return user;
     }
