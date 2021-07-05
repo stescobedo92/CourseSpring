@@ -1,6 +1,8 @@
 package com.edteam.course.controllers;
 
 import com.edteam.course.models.User;
+import com.edteam.course.repository.IUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,39 +12,28 @@ import java.util.List;
 @RequestMapping("user")
 public class UserController {
 
-    //GetAll users
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    List<User> getAll(){
-        List<User> listUser = new ArrayList<>();
+    @Autowired
+    private IUserRepository _userRepository;
 
+    @PostMapping("/add")
+    public String addUser(@RequestParam String name, @RequestParam String lastName,@RequestParam String email, @RequestParam String phone) {
         User user = new User();
-        user.setName("Joe");
-        user.setLastName("Wick");
-        user.setEmail("anyemail@email.com");
-        user.setPhone("55555");
+        user.setName(name);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPhone(phone);
 
-        listUser.add(user);
-
-        return listUser;
+        _userRepository.save(user);
+        return "Added new user to repo!";
     }
 
-    //Get user by id
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    User getUserById(@PathVariable long id){
-        User user = new User();
-        user.setName("Joe");
-        user.setLastName("Wick");
-        user.setEmail("anyemail@email.com");
-        user.setPhone("55555");
-
-        return user;
+    @GetMapping("/list")
+    public Iterable<User> getUsers() {
+        return _userRepository.findAll();
     }
 
-    //Get user by id
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    User insertUser(@RequestBody User user){
-        //Todo: register in the database
-
-        return user;
+    @GetMapping("/find/{id}")
+    public User findUserById(@PathVariable Integer id) {
+        return _userRepository.findUserById(id);
     }
 }
